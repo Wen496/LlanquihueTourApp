@@ -59,6 +59,37 @@ Juan Perez;12345678-9;guia;Llanquihue;Av. Costanera 123
 
 Los roles validos son: guia, operador y proveedor.
 
+## Semana 6 - Jerarquia de clases con herencia simple
+
+### Objetivo de la semana
+
+Modelar los distintos tipos de servicios turisticos que ofrece la agencia mediante una jerarquia de clases con herencia simple. Se crea una superclase con los atributos comunes a todo servicio (nombre y duracion) y subclases que la extienden agregando sus propios atributos, aplicando herencia, uso de super(...) y sobrescritura del metodo toString().
+
+### Clases creadas
+
+Paquete model (jerarquia de clases):
+- ServicioTuristico: superclase con los atributos comunes nombre y duracionHoras.
+- RutaGastronomica: subclase, agrega el atributo numeroDeParadas.
+- PaseoLacustre: subclase, agrega el atributo tipoEmbarcacion.
+- ExcursionCultural: subclase, agrega el atributo lugarHistorico.
+
+Todas las subclases heredan de ServicioTuristico (extends), usan super(...) en su constructor para inicializar los atributos heredados y sobrescriben toString() reutilizando el de la superclase con super.toString().
+
+Paquete data:
+- GestorServicios: crea las instancias de prueba (dos objetos de cada subclase) y las devuelve en un arreglo.
+
+Paquete ui:
+- Main: punto de entrada de esta actividad. Llama al gestor y muestra cada servicio por consola usando su metodo toString().
+
+### Instrucciones para ejecutar Main (Semana 6)
+
+1. Abrir el proyecto en NetBeans.
+2. Ubicar la clase Main dentro del paquete ui.
+3. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
+4. La consola Output muestra los seis servicios turisticos de prueba, cada uno con su informacion completa.
+
+Nota: el proyecto conserva la Main original del paquete app (semanas anteriores). Para esta actividad se ejecuta la Main del paquete ui.
+
 ## Autor
 
 Macarena Alvarez Saez
