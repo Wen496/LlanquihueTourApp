@@ -19,6 +19,14 @@ public class RutaGastronomica extends ServicioTuristico {
         this.numeroDeParadas = numeroDeParadas;
     }
 
+    // Sobrescribe mostrarInformacion() con datos específicos de la ruta gastronómica
+    @Override
+    public void mostrarInformacion() {
+        System.out.println("[Ruta Gastronómica] " + getNombre()
+                + " | Duración: " + getDuracionHoras() + " horas"
+                + " | Número de paradas: " + numeroDeParadas);
+    }
+
     // Sobrescribe toString() reutilizando el de la superclase con super.toString()
     @Override
     public String toString() {

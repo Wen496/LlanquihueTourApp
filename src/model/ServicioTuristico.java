@@ -29,6 +29,12 @@ public class ServicioTuristico {
         this.duracionHoras = duracionHoras;
     }
 
+    // Método polimórfico: implementación base.
+    // Las subclases lo sobrescriben para mostrar su información específica.
+    public void mostrarInformacion() {
+        System.out.println("Servicio: " + nombre + " | Duración: " + duracionHoras + " horas");
+    }
+
     // toString base: las subclases lo extienden con super.toString()
     @Override
     public String toString() {

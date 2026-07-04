@@ -19,6 +19,14 @@ public class PaseoLacustre extends ServicioTuristico {
         this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
+    // Sobrescribe mostrarInformacion() con datos específicos del paseo lacustre
+    @Override
+    public void mostrarInformacion() {
+        System.out.println("[Paseo Lacustre] " + getNombre()
+                + " | Duración: " + getDuracionHoras() + " horas"
+                + " | Tipo de embarcación: " + tipoEmbarcacion);
+    }
+
     // Sobrescribe toString() reutilizando el de la superclase con super.toString()
     @Override
     public String toString() {

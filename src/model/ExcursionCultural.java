@@ -19,6 +19,14 @@ public class ExcursionCultural extends ServicioTuristico {
         this.lugarHistorico = lugarHistorico;
     }
 
+    // Sobrescribe mostrarInformacion() con datos específicos de la excursión cultural
+    @Override
+    public void mostrarInformacion() {
+        System.out.println("[Excursión Cultural] " + getNombre()
+                + " | Duración: " + getDuracionHoras() + " horas"
+                + " | Lugar histórico: " + lugarHistorico);
+    }
+
     // Sobrescribe toString() reutilizando el de la superclase con super.toString()
     @Override
     public String toString() {

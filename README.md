@@ -13,17 +13,21 @@ El proyecto esta organizado en paquetes funcionales y aplica buenas practicas de
 El codigo fuente esta organizado en cuatro paquetes:
 
 model: clases que representan las entidades del dominio.
-- Direccion: representa la direccion de un colaborador (comuna y calle).
-- Colaborador: representa a un colaborador (nombre, rut, rol) y contiene un objeto Direccion adentro (relacion tiene una).
+
+* Direccion: representa la direccion de un colaborador (comuna y calle).
+* Colaborador: representa a un colaborador (nombre, rut, rol) y contiene un objeto Direccion adentro (relacion tiene una).
 
 util: clases de apoyo.
-- Validador: valida los datos leidos desde el archivo usando bloques try-catch (campos vacios y roles permitidos).
+
+* Validador: valida los datos leidos desde el archivo usando bloques try-catch (campos vacios y roles permitidos).
 
 service: logica de carga y operaciones sobre los datos.
-- GestorColaboradores: lee el archivo CSV, crea los objetos, los carga en un ArrayList y permite buscar colaboradores por rol.
+
+* GestorColaboradores: lee el archivo CSV, crea los objetos, los carga en un ArrayList y permite buscar colaboradores por rol.
 
 app: punto de entrada del programa.
-- Main: ejecuta el sistema, muestra el listado completo por consola y aplica el filtro por rol.
+
+* Main: ejecuta el sistema, muestra el listado completo por consola y aplica el filtro por rol.
 
 Ademas, la carpeta resources (en la raiz del proyecto) contiene el archivo de datos colaboradores.csv.
 
@@ -33,10 +37,10 @@ La clase Colaborador contiene un atributo del tipo Direccion, lo que refleja una
 
 ## Tecnologias
 
-- Lenguaje: Java
-- IDE: Apache NetBeans
-- Estructura de datos: ArrayList
-- Lectura de archivos: BufferedReader y FileReader
+* Lenguaje: Java
+* IDE: Apache NetBeans
+* Estructura de datos: ArrayList
+* Lectura de archivos: BufferedReader y FileReader
 
 ## Instrucciones de ejecucion
 
@@ -59,6 +63,10 @@ Juan Perez;12345678-9;guia;Llanquihue;Av. Costanera 123
 
 Los roles validos son: guia, operador y proveedor.
 
+
+
+
+
 ## Semana 6 - Jerarquia de clases con herencia simple
 
 ### Objetivo de la semana
@@ -68,18 +76,27 @@ Modelar los distintos tipos de servicios turisticos que ofrece la agencia median
 ### Clases creadas
 
 Paquete model (jerarquia de clases):
-- ServicioTuristico: superclase con los atributos comunes nombre y duracionHoras.
-- RutaGastronomica: subclase, agrega el atributo numeroDeParadas.
-- PaseoLacustre: subclase, agrega el atributo tipoEmbarcacion.
-- ExcursionCultural: subclase, agrega el atributo lugarHistorico.
+
+* ServicioTuristico: superclase con los atributos comunes nombre y duracionHoras.
+* RutaGastronomica: subclase, agrega el atributo numeroDeParadas.
+* PaseoLacustre: subclase, agrega el atributo tipoEmbarcacion.
+* ExcursionCultural: subclase, agrega el atributo lugarHistorico.
 
 Todas las subclases heredan de ServicioTuristico (extends), usan super(...) en su constructor para inicializar los atributos heredados y sobrescriben toString() reutilizando el de la superclase con super.toString().
 
 Paquete data:
-- GestorServicios: crea las instancias de prueba (dos objetos de cada subclase) y las devuelve en un arreglo.
+
+* GestorServicios: crea las instancias de prueba (dos objetos de cada subclase) y las devuelve en un arreglo.
 
 Paquete ui:
-- Main: punto de entrada de esta actividad. Llama al gestor y muestra cada servicio por consola usando su metodo toString().
+
+* Main: punto de entrada de esta actividad. Llama al gestor y muestra cada servicio por consola usando su metodo toString().
+
+
+
+
+
+
 
 ### Instrucciones para ejecutar Main (Semana 6)
 
@@ -90,6 +107,61 @@ Paquete ui:
 
 Nota: el proyecto conserva la Main original del paquete app (semanas anteriores). Para esta actividad se ejecuta la Main del paquete ui.
 
+
+
+### \## Semana 7 - Polimorfismo y colecciones genericas
+
+
+
+\### Objetivo de la semana
+
+
+
+Extender la jerarquia de clases creada en la Semana 6 incorporando el uso de colecciones genericas, la sobrescritura de metodos y polimorfismo, de manera que los distintos tipos de servicios turisticos se puedan almacenar y recorrer desde una misma coleccion, invocando el comportamiento especifico de cada subclase a traves de una referencia del tipo de la superclase.
+
+
+
+\### Cambios realizados
+
+
+
+Paquete model:
+
+\- ServicioTuristico: se agrega el metodo mostrarInformacion(), con una implementacion base.
+
+\- RutaGastronomica, PaseoLacustre, ExcursionCultural: cada subclase sobrescribe mostrarInformacion() (anotacion @Override) mostrando su informacion especifica.
+
+
+
+Paquete data:
+
+\- GestorServicios: se reemplaza el arreglo de la Semana 6 por una coleccion List<ServicioTuristico> (implementada con ArrayList), cargada con seis objetos combinando las tres subclases. Se agrega el metodo mostrarTodos(), que recorre la lista con un bucle for-each e invoca mostrarInformacion() de forma polimorfica.
+
+
+
+Paquete ui:
+
+\- Main: se actualiza para recibir la List<ServicioTuristico> desde GestorServicios y recorrerla con for-each, llamando a mostrarInformacion() desde la referencia de tipo ServicioTuristico.
+
+
+
+No se utiliza instanceof en ningun punto: el comportamiento especifico de cada servicio se obtiene unicamente por sobrescritura de metodos (polimorfismo).
+
+
+
+\### Instrucciones para ejecutar Main (Semana 7)
+
+
+
+1\. Abrir el proyecto en NetBeans.
+
+2\. Ubicar la clase Main dentro del paquete ui.
+
+3\. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
+
+4\. La consola Output muestra los seis servicios turisticos, cada uno desplegando su informacion mediante su propia version sobrescrita de mostrarInformacion().
+
 ## Autor
 
 Macarena Alvarez Saez
+
