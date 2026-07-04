@@ -63,10 +63,6 @@ Juan Perez;12345678-9;guia;Llanquihue;Av. Costanera 123
 
 Los roles validos son: guia, operador y proveedor.
 
-
-
-
-
 ## Semana 6 - Jerarquia de clases con herencia simple
 
 ### Objetivo de la semana
@@ -92,12 +88,6 @@ Paquete ui:
 
 * Main: punto de entrada de esta actividad. Llama al gestor y muestra cada servicio por consola usando su metodo toString().
 
-
-
-
-
-
-
 ### Instrucciones para ejecutar Main (Semana 6)
 
 1. Abrir el proyecto en NetBeans.
@@ -107,61 +97,36 @@ Paquete ui:
 
 Nota: el proyecto conserva la Main original del paquete app (semanas anteriores). Para esta actividad se ejecuta la Main del paquete ui.
 
+## Semana 7 - Polimorfismo y colecciones genericas
 
-
-### \## Semana 7 - Polimorfismo y colecciones genericas
-
-
-
-\### Objetivo de la semana
-
-
+### Objetivo de la semana
 
 Extender la jerarquia de clases creada en la Semana 6 incorporando el uso de colecciones genericas, la sobrescritura de metodos y polimorfismo, de manera que los distintos tipos de servicios turisticos se puedan almacenar y recorrer desde una misma coleccion, invocando el comportamiento especifico de cada subclase a traves de una referencia del tipo de la superclase.
 
-
-
-\### Cambios realizados
-
-
+### Cambios realizados
 
 Paquete model:
 
-\- ServicioTuristico: se agrega el metodo mostrarInformacion(), con una implementacion base.
-
-\- RutaGastronomica, PaseoLacustre, ExcursionCultural: cada subclase sobrescribe mostrarInformacion() (anotacion @Override) mostrando su informacion especifica.
-
-
+* ServicioTuristico: se agrega el metodo mostrarInformacion(), con una implementacion base.
+* RutaGastronomica, PaseoLacustre, ExcursionCultural: cada subclase sobrescribe mostrarInformacion() (anotacion @Override) mostrando su informacion especifica.
 
 Paquete data:
 
-\- GestorServicios: se reemplaza el arreglo de la Semana 6 por una coleccion List<ServicioTuristico> (implementada con ArrayList), cargada con seis objetos combinando las tres subclases. Se agrega el metodo mostrarTodos(), que recorre la lista con un bucle for-each e invoca mostrarInformacion() de forma polimorfica.
-
-
+* GestorServicios: se reemplaza el arreglo de la Semana 6 por una coleccion List<ServicioTuristico> (implementada con ArrayList), cargada con seis objetos combinando las tres subclases. Se agrega el metodo mostrarTodos(), que recorre la lista con un bucle for-each e invoca mostrarInformacion() de forma polimorfica.
 
 Paquete ui:
 
-\- Main: se actualiza para recibir la List<ServicioTuristico> desde GestorServicios y recorrerla con for-each, llamando a mostrarInformacion() desde la referencia de tipo ServicioTuristico.
-
-
+* Main: se actualiza para recibir la List<ServicioTuristico> desde GestorServicios y recorrerla con for-each, llamando a mostrarInformacion() desde la referencia de tipo ServicioTuristico.
 
 No se utiliza instanceof en ningun punto: el comportamiento especifico de cada servicio se obtiene unicamente por sobrescritura de metodos (polimorfismo).
 
+### Instrucciones para ejecutar Main (Semana 7)
 
-
-\### Instrucciones para ejecutar Main (Semana 7)
-
-
-
-1\. Abrir el proyecto en NetBeans.
-
-2\. Ubicar la clase Main dentro del paquete ui.
-
-3\. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
-
-4\. La consola Output muestra los seis servicios turisticos, cada uno desplegando su informacion mediante su propia version sobrescrita de mostrarInformacion().
+1. Abrir el proyecto en NetBeans.
+2. Ubicar la clase Main dentro del paquete ui.
+3. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
+4. La consola Output muestra los seis servicios turisticos, cada uno desplegando su informacion mediante su propia version sobrescrita de mostrarInformacion().
 
 ## Autor
 
 Macarena Alvarez Saez
-
