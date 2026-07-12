@@ -20,5 +20,10 @@ public class Main {
         for (ServicioTuristico servicio : servicios) {
             servicio.mostrarInformacion();
         }
+
+        // === Semana 8: se lanza la interfaz gráfica de gestión de entidades ===
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.iniciar();
     }
+
 }

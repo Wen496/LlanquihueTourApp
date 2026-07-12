@@ -1,132 +1,58 @@
 # LlanquihueTourApp
 
-## Descripcion
+Aplicación Java de escritorio para la agencia de turismo ficticia **Llanquihue Tour**, ambientada en la región de Los Lagos (Chile). El sistema permite gestionar los servicios turísticos y otras entidades de la agencia (guías, vehículos y colaboradores externos), aplicando conceptos de programación orientada a objetos.
 
-Aplicacion de consola desarrollada en Java para la agencia de turismo Llanquihue Tour, ubicada en la Region de Los Lagos. El sistema gestiona la informacion de los colaboradores vinculados a la agencia: guias, operadores y proveedores.
+Este proyecto se desarrolla de forma incremental como parte del ramo **Desarrollo Orientado a Objetos I (PRY2202)**.
 
-El programa lee los datos de los colaboradores desde un archivo externo (colaboradores.csv), construye objetos a partir de esa informacion, los almacena en una lista dinamica del tipo ArrayList y permite recorrer el listado completo y filtrar los colaboradores segun su rol.
+## Descripción del sistema (Semana 8)
 
-El proyecto esta organizado en paquetes funcionales y aplica buenas practicas de Programacion Orientada a Objetos: encapsulamiento, composicion entre clases y validacion de datos con bloques try-catch.
+En esta etapa el sistema incorpora:
 
-## Estructura del proyecto
+- Una **interfaz de comportamiento común** (`Registrable`) que obliga a todas las entidades gestionables a entregar un resumen de su información.
+- **Herencia y polimorfismo** entre distintas entidades de la empresa, con una clase base común (`Persona`) para guías y colaboradores.
+- Una **colección genérica** (`ArrayList<Registrable>`) que almacena entidades de distinto tipo y las diferencia en tiempo de ejecución mediante `instanceof`.
+- Una **interfaz gráfica básica** (con `JOptionPane`) que permite ingresar nuevas entidades y visualizar un resumen de las registradas.
 
-El codigo fuente esta organizado en cuatro paquetes:
+## Clases e interfaces principales
 
-model: clases que representan las entidades del dominio.
+### Paquete `model`
+- `Registrable` (interfaz): define los métodos `mostrarResumen()` y `obtenerResumen()`.
+- `Persona` (clase base abstracta): agrupa datos comunes (nombre, RUT, teléfono).
+- `GuiaTuristico`: hereda de `Persona` e implementa `Registrable`.
+- `ColaboradorExterno`: hereda de `Persona` e implementa `Registrable`.
+- `Vehiculo`: implementa `Registrable` directamente.
+- `ServicioTuristico` y sus subclases (`ExcursionCultural`, `PaseoLacustre`, `RutaGastronomica`): jerarquía de servicios turísticos de semanas anteriores.
+- Clases de apoyo: `Colaborador`, `Direccion`.
 
-* Direccion: representa la direccion de un colaborador (comuna y calle).
-* Colaborador: representa a un colaborador (nombre, rut, rol) y contiene un objeto Direccion adentro (relacion tiene una).
+### Paquete `data`
+- `GestorEntidades`: gestiona la colección `ArrayList<Registrable>` y diferencia los tipos con `instanceof`.
+- `GestorServicios`: gestiona los servicios turísticos.
 
-util: clases de apoyo.
+### Paquete `service`
+- `GestorColaboradores`: carga colaboradores desde un archivo CSV.
 
-* Validador: valida los datos leidos desde el archivo usando bloques try-catch (campos vacios y roles permitidos).
+### Paquete `ui`
+- `Main`: clase principal que ejecuta el programa.
+- `VentanaPrincipal`: interfaz gráfica basada en `JOptionPane` para ingresar y mostrar entidades.
 
-service: logica de carga y operaciones sobre los datos.
+### Paquete `util`
+- `Validador`: utilidades de validación de datos.
 
-* GestorColaboradores: lee el archivo CSV, crea los objetos, los carga en un ArrayList y permite buscar colaboradores por rol.
-
-app: punto de entrada del programa.
-
-* Main: ejecuta el sistema, muestra el listado completo por consola y aplica el filtro por rol.
-
-Ademas, la carpeta resources (en la raiz del proyecto) contiene el archivo de datos colaboradores.csv.
-
-## Relacion de composicion
-
-La clase Colaborador contiene un atributo del tipo Direccion, lo que refleja una relacion de composicion: un colaborador tiene una direccion. Al construir cada colaborador, primero se crea su objeto Direccion y luego se le asigna.
-
-## Tecnologias
-
-* Lenguaje: Java
-* IDE: Apache NetBeans
-* Estructura de datos: ArrayList
-* Lectura de archivos: BufferedReader y FileReader
-
-## Instrucciones de ejecucion
+## Cómo ejecutar el programa
 
 1. Clonar o descargar este repositorio.
-2. Abrir el proyecto en NetBeans (File, Open Project).
-3. Verificar que el archivo resources/colaboradores.csv exista en la raiz del proyecto.
-4. Ubicar la clase Main dentro del paquete app.
-5. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
-6. El resultado se muestra en la consola Output: primero el listado completo de colaboradores y luego el filtrado por rol.
+2. Abrir el proyecto en **Apache NetBeans**.
+3. Ejecutar la clase principal **`ui.Main`** (clic derecho sobre el archivo → *Run File*, o presionar F6 y seleccionar `ui.Main`).
+4. Al ejecutar, primero se muestran por consola los servicios turísticos y luego se abre la interfaz gráfica.
+5. En el menú gráfico se puede:
+   - Agregar un guía turístico.
+   - Agregar un vehículo.
+   - Agregar un colaborador externo.
+   - Mostrar todas las entidades registradas.
+   - Salir.
 
-## Formato del archivo de datos
+## Tecnologías
 
-Cada linea del archivo colaboradores.csv representa un colaborador, con sus campos separados por punto y coma en este orden:
-
-nombre;rut;rol;comuna;calle
-
-Ejemplo:
-
-Juan Perez;12345678-9;guia;Llanquihue;Av. Costanera 123
-
-Los roles validos son: guia, operador y proveedor.
-
-## Semana 6 - Jerarquia de clases con herencia simple
-
-### Objetivo de la semana
-
-Modelar los distintos tipos de servicios turisticos que ofrece la agencia mediante una jerarquia de clases con herencia simple. Se crea una superclase con los atributos comunes a todo servicio (nombre y duracion) y subclases que la extienden agregando sus propios atributos, aplicando herencia, uso de super(...) y sobrescritura del metodo toString().
-
-### Clases creadas
-
-Paquete model (jerarquia de clases):
-
-* ServicioTuristico: superclase con los atributos comunes nombre y duracionHoras.
-* RutaGastronomica: subclase, agrega el atributo numeroDeParadas.
-* PaseoLacustre: subclase, agrega el atributo tipoEmbarcacion.
-* ExcursionCultural: subclase, agrega el atributo lugarHistorico.
-
-Todas las subclases heredan de ServicioTuristico (extends), usan super(...) en su constructor para inicializar los atributos heredados y sobrescriben toString() reutilizando el de la superclase con super.toString().
-
-Paquete data:
-
-* GestorServicios: crea las instancias de prueba (dos objetos de cada subclase) y las devuelve en un arreglo.
-
-Paquete ui:
-
-* Main: punto de entrada de esta actividad. Llama al gestor y muestra cada servicio por consola usando su metodo toString().
-
-### Instrucciones para ejecutar Main (Semana 6)
-
-1. Abrir el proyecto en NetBeans.
-2. Ubicar la clase Main dentro del paquete ui.
-3. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
-4. La consola Output muestra los seis servicios turisticos de prueba, cada uno con su informacion completa.
-
-Nota: el proyecto conserva la Main original del paquete app (semanas anteriores). Para esta actividad se ejecuta la Main del paquete ui.
-
-## Semana 7 - Polimorfismo y colecciones genericas
-
-### Objetivo de la semana
-
-Extender la jerarquia de clases creada en la Semana 6 incorporando el uso de colecciones genericas, la sobrescritura de metodos y polimorfismo, de manera que los distintos tipos de servicios turisticos se puedan almacenar y recorrer desde una misma coleccion, invocando el comportamiento especifico de cada subclase a traves de una referencia del tipo de la superclase.
-
-### Cambios realizados
-
-Paquete model:
-
-* ServicioTuristico: se agrega el metodo mostrarInformacion(), con una implementacion base.
-* RutaGastronomica, PaseoLacustre, ExcursionCultural: cada subclase sobrescribe mostrarInformacion() (anotacion @Override) mostrando su informacion especifica.
-
-Paquete data:
-
-* GestorServicios: se reemplaza el arreglo de la Semana 6 por una coleccion List<ServicioTuristico> (implementada con ArrayList), cargada con seis objetos combinando las tres subclases. Se agrega el metodo mostrarTodos(), que recorre la lista con un bucle for-each e invoca mostrarInformacion() de forma polimorfica.
-
-Paquete ui:
-
-* Main: se actualiza para recibir la List<ServicioTuristico> desde GestorServicios y recorrerla con for-each, llamando a mostrarInformacion() desde la referencia de tipo ServicioTuristico.
-
-No se utiliza instanceof en ningun punto: el comportamiento especifico de cada servicio se obtiene unicamente por sobrescritura de metodos (polimorfismo).
-
-### Instrucciones para ejecutar Main (Semana 7)
-
-1. Abrir el proyecto en NetBeans.
-2. Ubicar la clase Main dentro del paquete ui.
-3. Hacer clic derecho sobre Main.java y seleccionar Run File (o presionar Shift + F6).
-4. La consola Output muestra los seis servicios turisticos, cada uno desplegando su informacion mediante su propia version sobrescrita de mostrarInformacion().
-
-## Autor
-
-Macarena Alvarez Saez
+- **Lenguaje:** Java (OpenJDK)
+- **IDE:** Apache NetBeans
+- **Interfaz gráfica:** Swing (`JOptionPane`)
