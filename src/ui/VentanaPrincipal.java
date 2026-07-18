@@ -10,17 +10,26 @@ import model.ColaboradorExterno;
  * Interfaz gráfica básica (basada en JOptionPane) que permite ingresar
  * distintos tipos de entidades del sistema Llanquihue Tour y visualizar
  * un resumen de todas las registradas.
+ *
+ * @author Macarena Alvarez Saez
+ * @version 1.0
  */
 public class VentanaPrincipal {
 
+    /** Gestor que almacena y administra las entidades ingresadas. */
     private GestorEntidades gestor;
 
+    /**
+     * Crea la ventana principal con un gestor de entidades vacío.
+     */
     public VentanaPrincipal() {
         this.gestor = new GestorEntidades();
     }
 
     /**
-     * Inicia el menú principal de la aplicación.
+     * Inicia el menú principal de la aplicación. Muestra las opciones en
+     * un cuadro de diálogo y repite el ciclo hasta que el usuario elige
+     * salir o cierra la ventana.
      */
     public void iniciar() {
         boolean salir = false;
@@ -67,6 +76,10 @@ public class VentanaPrincipal {
         JOptionPane.showMessageDialog(null, "¡Hasta pronto!");
     }
 
+    /**
+     * Solicita por diálogo los datos de un guía turístico y lo agrega
+     * al gestor de entidades.
+     */
     private void agregarGuia() {
         String nombre = JOptionPane.showInputDialog("Nombre del guía:");
         String rut = JOptionPane.showInputDialog("RUT:");
@@ -81,6 +94,10 @@ public class VentanaPrincipal {
         JOptionPane.showMessageDialog(null, "Guía agregado correctamente.");
     }
 
+    /**
+     * Solicita por diálogo los datos de un vehículo y lo agrega
+     * al gestor de entidades.
+     */
     private void agregarVehiculo() {
         String patente = JOptionPane.showInputDialog("Patente:");
         String marca = JOptionPane.showInputDialog("Marca:");
@@ -94,6 +111,10 @@ public class VentanaPrincipal {
         JOptionPane.showMessageDialog(null, "Vehículo agregado correctamente.");
     }
 
+    /**
+     * Solicita por diálogo los datos de un colaborador externo y lo agrega
+     * al gestor de entidades.
+     */
     private void agregarColaborador() {
         String nombre = JOptionPane.showInputDialog("Nombre del colaborador:");
         String rut = JOptionPane.showInputDialog("RUT:");
@@ -108,6 +129,11 @@ public class VentanaPrincipal {
         JOptionPane.showMessageDialog(null, "Colaborador agregado correctamente.");
     }
 
+    /**
+     * Muestra en un cuadro de diálogo el resumen de todas las entidades
+     * registradas, aprovechando el polimorfismo de obtenerResumen().
+     * Si no hay entidades, informa al usuario.
+     */
     private void mostrarEntidades() {
         if (gestor.getCantidad() == 0) {
             JOptionPane.showMessageDialog(null,

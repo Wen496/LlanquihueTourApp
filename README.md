@@ -1,1 +1,121 @@
-# LlanquihueTourAppAplicación Java de escritorio para la agencia de turismo ficticia **Llanquihue Tour**, ambientada en la región de Los Lagos (Chile). El sistema permite gestionar los servicios turísticos y otras entidades de la agencia (guías, vehículos y colaboradores externos), aplicando conceptos de programación orientada a objetos.Este proyecto se desarrolla de forma incremental como parte del ramo **Desarrollo Orientado a Objetos I (PRY2202)**.## Descripción del sistema (Semana 8)En esta etapa el sistema incorpora:* Una **interfaz de comportamiento común** (`Registrable`) que obliga a todas las entidades gestionables a entregar un resumen de su información.* **Herencia y polimorfismo** entre distintas entidades de la empresa, con una clase base común (`Persona`) para guías y colaboradores.* Una **colección genérica** (`ArrayList<Registrable>`) que almacena entidades de distinto tipo y las diferencia en tiempo de ejecución mediante `instanceof`.* Una **interfaz gráfica básica** (con `JOptionPane`) que permite ingresar nuevas entidades y visualizar un resumen de las registradas.## Clases e interfaces principales### Paquete `model`* `Registrable` (interfaz): define los métodos `mostrarResumen()` y `obtenerResumen()`.* `Persona` (clase base abstracta): agrupa datos comunes (nombre, RUT, teléfono).* `GuiaTuristico`: hereda de `Persona` e implementa `Registrable`.* `ColaboradorExterno`: hereda de `Persona` e implementa `Registrable`.* `Vehiculo`: implementa `Registrable` directamente.* `ServicioTuristico` y sus subclases (`ExcursionCultural`, `PaseoLacustre`, `RutaGastronomica`): jerarquía de servicios turísticos de semanas anteriores.* Clases de apoyo: `Colaborador`, `Direccion`.### Paquete `data`* `GestorEntidades`: gestiona la colección `ArrayList<Registrable>` y diferencia los tipos con `instanceof`.* `GestorServicios`: gestiona los servicios turísticos.### Paquete `service`* `GestorColaboradores`: carga colaboradores desde un archivo CSV.### Paquete `ui`* `Main`: clase principal que ejecuta el programa.* `VentanaPrincipal`: interfaz gráfica basada en `JOptionPane` para ingresar y mostrar entidades.### Paquete `util`* `Validador`: utilidades de validación de datos.## Cómo ejecutar el programa1. Clonar o descargar este repositorio.2. Abrir el proyecto en **Apache NetBeans**.3. Ejecutar la clase principal **`ui.Main`** (clic derecho sobre el archivo → *Run File*, o presionar F6 y seleccionar `ui.Main`).4. Al ejecutar, primero se muestran por consola los servicios turísticos y luego se abre la interfaz gráfica.5. En el menú gráfico se puede:   * Agregar un guía turístico.   * Agregar un vehículo.   * Agregar un colaborador externo.   * Mostrar todas las entidades registradas.   * Salir.## Tecnologías* **Lenguaje:** Java (OpenJDK)* **IDE:** Apache NetBeans* **Interfaz gráfica:** Swing (`JOptionPane`)
+# LlanquihueTourApp
+
+Sistema de gestión para una agencia de turismo de la región de Los Lagos, Chile.
+Permite administrar servicios turísticos, guías, colaboradores externos y vehículos,
+cargando la información desde archivos de texto plano y gestionándola mediante una
+interfaz gráfica basada en `JOptionPane`.
+
+**Asignatura:** Desarrollo Orientado a Objetos I (PRY2202) — Duoc UC
+**Autora:** Macarena Álvarez Sáez
+**Docente:** Eithel González Rojas
+
+---
+
+## Descripción
+
+La aplicación modela el dominio de una agencia turística aplicando los principios
+de la programación orientada a objetos: encapsulamiento, herencia, polimorfismo y
+abstracción. Los datos se cargan desde archivos `.txt` ubicados en la carpeta
+`datos/`, se almacenan en colecciones (`ArrayList`) y se procesan de forma
+polimórfica, diferenciando los tipos concretos en tiempo de ejecución con
+`instanceof`.
+
+---
+
+## Estructura de paquetes
+
+```
+src/
+├── data/
+│   ├── GestorEntidades.java    Colección polimórfica de Registrable
+│   ├── GestorServicios.java    Carga y filtrado de servicios turísticos
+│   └── LectorArchivos.java     Lectura de colaboradores desde .txt
+├── model/
+│   ├── Persona.java            Clase abstracta base
+│   ├── GuiaTuristico.java      Hereda de Persona, implementa Registrable
+│   ├── ColaboradorExterno.java Hereda de Persona, implementa Registrable
+│   ├── Colaborador.java        Colaborador con Direccion (composición)
+│   ├── Direccion.java          Comuna y calle
+│   ├── Vehiculo.java           Implementa Registrable
+│   ├── Registrable.java        Interfaz: mostrarResumen(), obtenerResumen()
+│   ├── ServicioTuristico.java  Clase base de los servicios
+│   ├── RutaGastronomica.java   Subclase de ServicioTuristico
+│   ├── PaseoLacustre.java      Subclase de ServicioTuristico
+│   └── ExcursionCultural.java  Subclase de ServicioTuristico
+├── service/
+│   └── GestorColaboradores.java  Carga y búsqueda de colaboradores por rol
+├── ui/
+│   ├── Main.java               Punto de entrada de la aplicación
+│   └── VentanaPrincipal.java   Interfaz gráfica con JOptionPane
+└── util/
+    ├── Validador.java          Validación de texto, rol y RUT
+    └── ValidacionException.java Excepción personalizada
+datos/
+├── colaboradores.txt
+└── servicios.txt
+```
+
+---
+
+## Conceptos aplicados
+
+| Concepto | Dónde |
+|---|---|
+| Paquetes | `data`, `model`, `service`, `ui`, `util` |
+| Encapsulamiento | Atributos `private` con getters/setters en todo `model` |
+| Herencia | `Persona` → `GuiaTuristico`, `ColaboradorExterno`; `ServicioTuristico` → `RutaGastronomica`, `PaseoLacustre`, `ExcursionCultural` |
+| Clase abstracta | `Persona` |
+| Interfaz | `Registrable` |
+| Polimorfismo | `mostrarInformacion()` y `mostrarResumen()` sobrescritos con `@Override` |
+| `instanceof` | `Main` y `GestorEntidades` para diferenciar tipos concretos |
+| Composición | `Colaborador` contiene un objeto `Direccion` |
+| Colecciones | `ArrayList<ServicioTuristico>`, `ArrayList<Registrable>`, `List<Persona>` |
+| Archivos | Lectura de `.txt` con `BufferedReader` y try-with-resources |
+| Excepción personalizada | `ValidacionException` |
+| Interfaz gráfica | `VentanaPrincipal` con `JOptionPane` |
+
+---
+
+## Requisitos
+
+- JDK 8 o superior
+- Apache NetBeans (el proyecto usa Ant)
+
+---
+
+## Cómo clonar y ejecutar
+
+```bash
+git clone https://github.com/Wen496/LlanquihueTourApp.git
+```
+
+1. Abrir NetBeans → **File → Open Project** → seleccionar la carpeta `LlanquihueTourApp`.
+2. Clic derecho en el proyecto → **Clean and Build**.
+3. Clic derecho en el proyecto → **Run** (o presionar F6).
+
+La clase principal es `ui.Main`. Al ejecutar, el programa:
+
+1. Carga los servicios turísticos desde `datos/servicios.txt` y los muestra por consola aplicando polimorfismo.
+2. Filtra y lista los servicios de hasta 3 horas de duración.
+3. Carga los colaboradores desde `datos/colaboradores.txt`.
+4. Recorre una lista polimórfica de `Registrable` usando `instanceof` para mostrar los datos específicos de cada tipo.
+5. Lanza la interfaz gráfica de gestión de entidades.
+
+---
+
+## Formato de los archivos de datos
+
+**`datos/colaboradores.txt`**
+```
+rol;nombre;rut;telefono;campo1;campo2
+```
+- `guia` → campo1 = idioma, campo2 = años de experiencia
+- `externo` → campo1 = empresa, campo2 = tipo de servicio
+
+**`datos/servicios.txt`**
+```
+tipo;nombre;duracionHoras;atributoEspecifico
+```
+- `ruta` → número de paradas
+- `paseo` → tipo de embarcación
+- `excursion` → lugar histórico

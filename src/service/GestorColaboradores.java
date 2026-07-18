@@ -8,9 +8,25 @@ import model.Colaborador;
 import model.Direccion;
 import util.Validador;
 
+/**
+ * Servicio encargado de cargar colaboradores desde un archivo de texto
+ * y de realizar búsquedas sobre la colección resultante.
+ *
+ * @author Macarena Alvarez Saez
+ * @version 1.0
+ */
 public class GestorColaboradores {
 
-    // Lee el archivo CSV y devuelve un ArrayList de Colaboradores
+    /**
+     * Lee un archivo separado por punto y coma y construye la lista de
+     * colaboradores. Cada línea debe tener el formato:
+     * nombre;rut;rol;comuna;calle. Los campos se validan antes de crear
+     * cada objeto, y la dirección se arma por composición.
+     *
+     * @param rutaArchivo ruta del archivo a leer
+     * @return lista de colaboradores cargados; vacía si el archivo no se
+     *         puede leer
+     */
     public ArrayList<Colaborador> cargarColaboradores(String rutaArchivo) {
 
         // 1. Creamos la lista vacía
@@ -52,7 +68,14 @@ public class GestorColaboradores {
         return colaboradores;
     }
 
-    // Busca y devuelve los colaboradores que tengan un rol específico
+    /**
+     * Filtra una lista de colaboradores dejando solo los que tengan el rol
+     * indicado. La comparación no distingue mayúsculas de minúsculas.
+     *
+     * @param lista      colección de colaboradores a filtrar
+     * @param rolBuscado rol por el cual filtrar (por ejemplo "guia")
+     * @return nueva lista con los colaboradores que coinciden con el rol
+     */
     public ArrayList<Colaborador> buscarPorRol(ArrayList<Colaborador> lista, String rolBuscado) {
         ArrayList<Colaborador> resultado = new ArrayList<>();
         for (Colaborador c : lista) {
