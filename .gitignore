@@ -1,1 +1,15 @@
-/dist/
+# NetBeans
+build/
+dist/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Compilados
+*.class
+*.jar
+
+# Sistema
+Thumbs.db
+.DS_Store

@@ -1,0 +1,7 @@
+# rol;nombre;rut;telefono;campo1;campo2
+guia;Juan Perez;12345678-5;+56912345678;Espanol;8
+guia;Ana Munoz;15678912-7;+56987654321;Ingles;5
+guia;Diego Vargas;16789234-5;+56911223344;Aleman;3
+externo;Maria Gonzalez;9876543-3;+56922334455;Transportes Del Sur;Transporte
+externo;Pedro Soto;11222333-9;+56933445566;Hotel Frutillar;Alojamiento
+externo;Luisa Rojas;18456789-K;+56944556677;Catering Gramado;Gastronomia

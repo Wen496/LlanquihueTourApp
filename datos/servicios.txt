@@ -1,0 +1,10 @@
+# tipo;nombre;duracionHoras;atributoEspecifico
+gastronomica;Ruta de la Cerveza Artesanal;4;5
+gastronomica;Sabores del Lago;3;3
+lacustre;Navegacion Lago Llanquihue;2;Catamaran
+lacustre;Travesia al Atardecer;3;Lancha
+cultural;Iglesias Patrimoniales de Chiloe;6;Iglesia de Achao
+cultural;Colonos Alemanes de Frutillar;4;Museo Colonial Aleman
+gastronomica;Cocina Mapuche Ancestral;5;4
+lacustre;Kayak en Ensenada;2;Kayak
+cultural;Patrimonio de Puerto Varas;3;Casa Kuschel
